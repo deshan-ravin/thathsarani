@@ -4,11 +4,9 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useRouter } from "next/router"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const router = useRouter() // Get the router to check the current path
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -72,43 +70,25 @@ export default function Header() {
 }
 
 function NavLinks({ onClick }: { onClick?: () => void }) {
-  const router = useRouter()
-
-  // Links with hash-based navigation
   const links = [
     { href: "/", label: "HOME" },
-    { href: "#bio", label: "BIO" },
-    { href: "#experience", label: "EXPERIENCE" },
-    { href: "#education", label: "EDUCATION" },
-    { href: "#contact", label: "CONTACT" },
+    { href: "/", label: "BIO" },
+    { href: "/", label: "EXPERIENCE" },
+    { href: "/", label: "EDUCATION" },
+    { href: "/", label: "CONTACT" },
   ]
-
-  const handleLinkClick = (href: string) => {
-    if (href.startsWith("#")) {
-      // If the href is a hash, prevent page navigation and just scroll to the section
-      const section = document.querySelector(href)
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" })
-      }
-    } else {
-      // If it's not a hash, navigate normally
-      router.push(href)
-    }
-  }
 
   return (
     <>
       {links.map((link) => (
-        <button
+        <Link
           key={link.label}
+          href={link.href}
           className="font-medium hover:text-gray-300 transition-colors"
-          onClick={() => {
-            handleLinkClick(link.href)
-            if (onClick) onClick()
-          }}
+          onClick={onClick}
         >
           {link.label}
-        </button>
+        </Link>
       ))}
     </>
   )
