@@ -38,7 +38,7 @@ const Form = () => {
         Accept: 'application/json',
       },
       body: JSON.stringify({
-        access_key: '4ab24ab2-3d0c-40cc-8dcd-c5c7alcf5a87', // Your access key
+        access_key: '4ab24ab2-3d0c-40cc-8dcd-c5c7a1cf5a87', // Your access key
         name: values.name,
         email: values.email,
         message: values.message,
